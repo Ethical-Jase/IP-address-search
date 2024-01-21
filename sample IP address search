@@ -1,0 +1,27 @@
+import re
+
+def find_ioc(ip, file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+            matches = re.findall(ip, content)
+            
+            if matches:
+                print(f"IP '{ip}' found in {file_path}")
+                print("Matches:")
+                for match in matches:
+                    print(match)
+            else:
+                print(f"IP '{ip}' not found in {file_path}")
+
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+
+if __name__ == "__main__":
+    # Replace 'ip_to_find' with your desired IOC (e.g., IP address, domain, etc.)
+    ip_to_find = r'192\.168\.50\.254'
+
+    # Replace 'sample_log.txt' with the path to your text file containing the log data
+    log_file_path = 'Test_ip_address_search.txt'
+
+    find_ioc(ip_to_find, log_file_path)
